@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'spork'
-
+require 'database_cleaner'
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However, 
   # if you change any configuration or code from libraries loaded here, you'll
@@ -36,6 +36,18 @@ Spork.prefork do
     # Emulate initializer set_clear_dependencies_hook in 
     # railties/lib/rails/application/bootstrap.rb
     ActiveSupport::Dependencies.clear
+    
+	config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+    
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+    
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
   end
 end
 
@@ -43,3 +55,4 @@ Spork.each_run do
   # This code will be run each time you run your specs.
   require File.expand_path("../../config/routes", __FILE__)
 end
+
