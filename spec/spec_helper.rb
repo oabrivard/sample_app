@@ -30,21 +30,32 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, comment the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false # we use DatabaseCleaner instead of transactions (pb with rpsec otherwise)
 
     ### Part of a Spork hack. See http://bit.ly/arY19y
     # Emulate initializer set_clear_dependencies_hook in 
     # railties/lib/rails/application/bootstrap.rb
     ActiveSupport::Dependencies.clear
-    
-	config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
+
+    def test_sign_in(user)
+        controller.sign_in(user)
+    end
+
+    def integration_sign_in(user)
+      visit signin_path
+      fill_in :email, :with => user.email 
+      fill_in :password, :with => user.password 
+      click_button
     end
     
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
     config.before(:each) do
       DatabaseCleaner.start
     end
-    
+
     config.after(:each) do
       DatabaseCleaner.clean
     end
