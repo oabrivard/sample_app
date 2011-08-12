@@ -30,8 +30,11 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, comment the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = false # we use DatabaseCleaner instead of transactions (pb with rpsec otherwise)
-
+    
+    # we use DatabaseCleaner 
+    # set flag to false on Mac OSX -> problem with rpsec otherwise
+    config.use_transactional_fixtures = false 
+    
     ### Part of a Spork hack. See http://bit.ly/arY19y
     # Emulate initializer set_clear_dependencies_hook in 
     # railties/lib/rails/application/bootstrap.rb

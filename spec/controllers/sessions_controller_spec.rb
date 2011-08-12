@@ -45,7 +45,7 @@ describe SessionsController do
 
       it "should sign the user in" do 
         post :create, :session => @attr 
-        controller.current_user.should == @user 
+        controller.current_user.id.should == @user.id  # cache problem with rspec so we test id instead of object
         controller.should be_signed_in
       end
 

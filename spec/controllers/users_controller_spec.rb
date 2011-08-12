@@ -44,7 +44,7 @@ describe UsersController do
 
     it "should find the right user" do
       get :show, :id => @user
-      assigns(:user).should == @user
+      assigns(:user).id.should == @user.id # cache problem with rspec so we test id instead of object
     end
 
     it "should have the right title" do
