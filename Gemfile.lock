@@ -28,7 +28,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    annotate-models (1.0.4)
+    annotate (2.4.0)
     arel (2.0.6)
     builder (2.1.2)
     database_cleaner (0.6.7)
@@ -98,7 +98,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate-models (= 1.0.4)
+  annotate (= 2.4.0)
   database_cleaner
   factory_girl_rails (= 1.0)
   faker (= 0.3.1)

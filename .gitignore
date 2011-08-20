@@ -4,6 +4,8 @@ log/*.log
 *.log
 tmp/**/*
 tmp/*
+.idea/
+.idea/**/*
 doc/api
 doc/app
 *.swp
